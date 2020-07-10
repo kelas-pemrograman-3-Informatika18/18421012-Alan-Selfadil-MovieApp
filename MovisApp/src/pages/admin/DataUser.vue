@@ -59,7 +59,7 @@ export default {
   methods: {
     getData () {
       this.$axios.get('user/getalluser')
-        .then(response => {
+        .then(res => {
           if (res.data.sukses) {
             this.data = res.data.data
           } else {

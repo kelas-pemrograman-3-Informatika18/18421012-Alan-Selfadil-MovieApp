@@ -1,4 +1,4 @@
-import { Notify, colors } from 'quasar'
+import { Notify } from 'quasar'
 
 const show = (message, jenis) => {
   Notify.create({

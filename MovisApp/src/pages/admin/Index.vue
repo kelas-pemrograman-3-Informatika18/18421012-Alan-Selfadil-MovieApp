@@ -117,8 +117,8 @@
 
         <q-card-section align="right" class="bg-white text-teal">
           <q-btn flat label="Ok" v-class-popup />
-        <q-card-section>
-      </q-card>    
+        </q-card-section>
+      </q-card>
     </q-dialog>
   </q-page>
 </template>

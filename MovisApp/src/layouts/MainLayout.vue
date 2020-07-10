@@ -42,7 +42,7 @@
             </div>
           </q-item>
 
-          <q-item clickable active-class="active" v-ripple exac to="{ name: 'dashboardAdmin' }">
+          <q-item clickable active-class="active" v-ripple exac :to="{ name: 'dashboardAdmin' }">
             <q-item-section avatar>
               <q-icon name="dashboard"/>
             </q-item-section>
@@ -50,7 +50,7 @@
                 <q-item-label>Dashboard</q-item-label>
               </q-item-section>
           </q-item>
-          <q-item clickable active-class="active" v-ripple exac to="{ name: 'dataDVD' }">
+          <q-item clickable active-class="active" v-ripple exac :to="{ name: 'dataDVD' }">
             <q-item-section avatar>
               <q-icon name="dashboard"/>
             </q-item-section>
@@ -58,7 +58,7 @@
                 <q-item-label>Data DVD</q-item-label>
               </q-item-section>
           </q-item>
-          <q-item clickable active-class="active" to="{ name: 'InputBarang' }" v-ripple exact>
+          <q-item clickable active-class="active" :to="{ name: 'InputBarang' }" v-ripple exact>
             <q-item-section avatar>
               <q-icon name="input"/>
             </q-item-section>
@@ -66,7 +66,7 @@
                 <q-item-label>Input DVD</q-item-label>
               </q-item-section>
           </q-item>
-          <q-item clickable active-class="active" to"{ name: 'DataUser' }" v-ripple exact>
+          <q-item clickable active-class="active" :to="{ name: 'DataUser' }" v-ripple exact>
             <q-item-section avatar>
               <q-icon name="supervisor_account"/>
             </q-item-section>

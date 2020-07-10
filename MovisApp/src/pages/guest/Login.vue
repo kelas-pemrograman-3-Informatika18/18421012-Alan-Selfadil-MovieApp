@@ -19,15 +19,23 @@
                       <div>Login Akun Anda</div>
                     </q-card-section>
                       <q-form
-                      @submit="login"
+                          @submit="login"
                       >
                         <q-card-section>
-                          <q-input v-model="username" label="Username"/>
-                          <q-input type="password" v-model="password" label="Password"/>
+                          <q-input v-model="username"
+                          :rules="[
+                            val => val && val.length > 0 || 'Type you username'
+                          ]"
+                          label="Username"/>
+                          <q-input type="password" v-model="password"
+                          :rules="[
+                            val => val && val.length > 0 || 'Type you username'
+                          ]"
+                          label="Password"/>
                         </q-card-section>
                         <q-card-section>
-                        <q-btn class="full-width" type="submit" unelevated colors="primary" label="Login"/>
-                        <q-btn class="full-width q-mt-md" to="{ name: 'registerPage' }" flat unelevated colors="primary" label="Register"/>
+                          <q-btn class="full-width" type="submit" unelevated colors="primary" label="Login"/>
+                          <q-btn class="full-width q-mt-md" :to="{ name: 'registerPage' }" flat unelevated colors="primary" label="Register"/>
                         </q-card-section>
                       </q-form>
                   </div>

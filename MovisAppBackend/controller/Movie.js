@@ -1,7 +1,9 @@
 const movieModel = require('../model/Movie')
-const { requestResponse, requestRespone } = require('../config')
+const { requestResponse } = require('../config')
 const objectId = require('mongoose').Types.ObjectId
 const { deleteImage } = require('../uploadConfig')
+const { request } = require('express')
+
 exports.insertMovie = (data) =>
   new Promise((resolve, reject) => {
     movieModel.create(data)
@@ -34,7 +36,7 @@ exports.edit = (data, id, changeImage) =>
           deleteImage(data.oldImage)
         }
         resolve(requestResponse.sukses('Berhasil Edit Movie'))
-      }). catch(() => reject(requestResponse.severError))
+      }).catch(() => reject(requestResponse.severError))
   })
 
 exports.delete = (id) =>

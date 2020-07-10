@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-    <div class="q-md-xl">
-    <q-carousel
+    <div class="q-mb-xl">
+      <q-carousel
         animated
         v-model="slide"
         navigation
@@ -19,58 +19,57 @@
       </q-carousel>
     </div>
     <div class="row q-col-gutter-md">
-      <div class="col-md-3 col-xs-12" v-for="(movie, 1) in data" :key="i">
-         <q-card>
+      <div class="col-md-3 col-xs-12" v-for="(movie, i) in data" :key="i">
+        <q-card>
           <q-img
-            :src="`${baseImageURL}/${movie.image}`"
+            :src="`${$baseImageURL}/${movie.image}`"
             :ratio="16/9"
           />
 
           <q-card-section>
             <q-btn
               fab
-              color="warning"
+              color="red"
               icon="add_shopping_cart"
               class="absolute"
-              unelavated
+              unelevated
               style="top: 0; right: 12px; transform: translateY(-50%);"
             />
 
             <div class="row no-wrap items-center">
               <div class="col text-h6 ellipsis">
                 {{ movie.judulFilm }}
-          </div>
-        </div>
-
-        <q-rating v-model="movie.rating" readonly colors="orange-5" :max="5" size="32px" />
-      </q-card-section>
-
-      <q-card-section class="q-pt-none">
-        <div class="text-subtitle1">
-          Rp. {{ movie.harga }},-
-        </div>
-        <q-card-section class="q-pt-none">
-          <div class="text-subtitle1">
-            {{ movie.genre }}
-        </div>
-        <div @click="movie.expanded = !movie.expanded" class="text-caption text-grey cursor-pointer">
-          Tampilkan Deskripsi
-        </div>
-        <q-slide-transition>
-          <div v-show="movie.expanded">
-            <div class="text-grey text-caption">
-              {{ movie.deskripsi }}
+              </div>
             </div>
-          </div>
-        </q-slide-transition>
-      </q-card-section>
 
-      <q-card-actions>
-        <q-btn unelavated @click="openDetail(movie)" class="full-width" color="primary">
-          Order Now
-        </q-btn>
-      </q-card-actions>
-    </q-card>
+            <q-rating v-model="movie.rating" readonly color="orange-5" :max="5" size="32px" />
+          </q-card-section>
+
+          <q-card-section class="q-pt-none">
+            <div class="text-subtitle1">
+              Rp. {{ movie.harga }},-
+            </div>
+            <div class="text-subtitle1">
+              {{ movie.genre }}
+            </div>
+            <div @click="movie.expanded = !movie.expanded" class="text-caption text-grey cursor-pointer">
+              Tampikan Deskripsi
+            </div>
+            <q-slide-transition>
+              <div v-show="movie.expanded">
+                <div class="text-grey text-caption">
+                  {{ movie.deskripsi }}
+                </div>
+              </div>
+            </q-slide-transition>
+          </q-card-section>
+
+          <q-card-actions>
+            <q-btn unelevated @click="openDetail(movie)" class="full-width" color="primary">
+              Order Now
+            </q-btn>
+          </q-card-actions>
+        </q-card>
       </div>
     </div>
     <q-dialog v-model="dialog" v-if="dialog" position="bottom">
@@ -119,9 +118,13 @@ export default {
       this.$axios.get('movie/getall')
         .then(res => {
           if (res.data.sukses) {
-            this.data = res.data.data
+            this.data = res.data.data.map(movie => {
+              return Object.assign(movie, {
+                expanded: false
+              })
+            })
           } else {
-            this.$showNotif(res.data.pesan, 'negative')
+            this.$showNotif(res.data.pesan, 'negatvie')
           }
         })
     },
@@ -138,7 +141,7 @@ export default {
         harga: this.activeData.harga,
         jumlah: this.jumlah,
         total: this.total
-      }),
+      }))
       this.$axios.post('order/insert', formData)
         .then(res => {
           if (res.data.sukses) {
@@ -149,12 +152,11 @@ export default {
             this.$showNotif(res.data.pesan, 'negatvie')
           }
         })
-      }
     }
   },
   computed: {
     total () {
-      return this.activeData.harga = this.jumlah
+      return this.activeData.harga * this.jumlah
     }
   }
 }

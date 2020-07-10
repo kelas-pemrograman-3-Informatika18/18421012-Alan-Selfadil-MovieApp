@@ -109,13 +109,13 @@ export default {
   methods: {
     getData () {
       this.$axios.get('movie/getbyId/$(this.$route.params.id)')
-      .them(res => {
-        if (res.data.sukses) {
-          this.form = res.data.data
-        } else {
-          this.$router.pus({ name: 'dataDVD' })
-        }
-      })
+        .then(res => {
+          if (res.data.sukses) {
+            this.form = res.data.data
+          } else {
+            this.$router.pus({ name: 'dataDVD' })
+          }
+        })
     },
     onSubmit () {
       const formData = new FormData()

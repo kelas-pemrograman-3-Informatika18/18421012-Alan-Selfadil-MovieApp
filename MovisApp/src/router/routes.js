@@ -10,12 +10,12 @@ const routes = [
       { path: '', name: 'dashboardAdmin', component: () => import('pages/admin/Index.vue') },
       { path: 'inputbarang', name: 'InputBarang', component: () => import('pages/admin/InputBarang.vue') },
       { path: 'datauser', name: 'DataUser', component: () => import('pages/admin/DataUser.vue') },
-      { path: 'datadvd', name: 'dataDVD', component: () => import('pages/admin/DataDVD.vue') },
+      { path: 'datadvd', name: 'DataDVD', component: () => import('pages/admin/DataDVD.vue') },
       { path: 'formedit/:id', name: 'formEditDVD', component: () => import('pages/admin/FormEdit.vue') }
     ]
   },
   {
-    pat: '/user',
+    path: '/user',
     component: () => import('layouts/UserLayout.vue'),
     meta: {
       authUser: true

@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <q-card class="bg-grey-8" flat>
+    <q-card flat>
       <q-table
         :data="data"
         flat
@@ -27,33 +27,29 @@
             <q-td key="judulFilm" :props="props">
               {{ props.row.judulFilm }}
             </q-td>
-            <q-tr :props="props">
-              <q-td key="harga" :props="props">
-                Rp. {{ props.row.harga }},-
+            <q-td key="harga" :props="props">
+              Rp. {{ props.row.harga }},-
             </q-td>
-            <q-tr :props="props">
-              <q-td key="tahun" :props="props">
-                {{ props.row.tahun }}
+            <q-td key="tahun" :props="props">
+              {{ props.row.tahun }}
             </q-td>
-            <q-tr :props="props">
-              <q-td key="genre" :props="props">
-                {{ props.row.genre }}
+            <q-td key="genre" :props="props">
+              {{ props.row.genre }}
             </q-td>
-            <q-tr :props="props">
-              <q-td key="deskripsi" :props="props">
-                <div class="ellipsis" style="max-width: 200px">
-                  {{ props.row.deskripsi }}
-                </div>
+            <q-td key="deskripsi" :props="props">
+              <div class="ellipsis" style="max-width: 200px;">
+                {{ props.row.deskripsi }}
+              </div>
             </q-td>
-              <q-td key="gambar" :props="props">
-                <q-img
-                  :src="`${$baseImageURL}/${props.row.image}`"
-                  spinner-color="white"
-                />
+            <q-td key="gambar" :props="props">
+              <q-img
+                :src="`${$baseImageURL}/${props.row.image}`"
+                spinner-color="white"
+              />
             </q-td>
             <q-td key="aksi" :props="props">
               <div class="row q-gutter-md">
-                <q-btn :to="{ name: 'formEditDVD', params:{ id: props.row._id }}" label="Edit" icon="edit" color="warning" unelevated/>
+                <q-btn :to="{ name: 'formEditDVD', params: { id: props.row._id }}" label="Edit" icon="edit" color="warning" unelevated/>
                 <q-btn @click="deleteMovie(props.row._id)" label="Hapus" icon="delete" color="negative" unelevated/>
               </div>
             </q-td>
@@ -76,7 +72,7 @@ export default {
         { name: 'genre', align: 'left', label: 'Genre', field: 'genre', sortable: true },
         { name: 'deskripsi', align: 'left', label: 'Deskripsi', field: 'deskripsi', sortable: true },
         { name: 'gambar', align: 'left', label: 'Gambar', field: 'gambar' },
-        { name: 'aksi', align: 'left', label: 'Aksi', field: 'Aksi' } 
+        { name: 'aksi', align: 'left', label: 'Aksi', field: 'aksi' }
       ],
       data: []
     }
@@ -87,7 +83,7 @@ export default {
   methods: {
     getData () {
       this.$axios.get('movie/getall')
-        .them((res) => {
+        .then((res) => {
           if (res.data.sukses) {
             this.data = res.data.data
           } else {
@@ -98,11 +94,11 @@ export default {
     deleteMovie (id) {
       this.$q.dialog({
         title: 'Konfirmasi',
-        message: 'Apakah Anda Yakin?',
+        message: 'Apakah Anda Yakin ?',
         cancel: true,
         persistent: true
       }).onOk(() => {
-        this.$axios.delete('movie/delete/$(id)')
+        this.$axios.delete(`movie/delete/${id}`)
           .then(res => {
             if (res.data.sukses) {
               this.$showNotif(res.data.pesan, 'positive')
@@ -111,14 +107,15 @@ export default {
               this.$showNotif(res.data.pesan, 'negative')
             }
           })
-      }
+      })
     }
   }
+}
 </script>
 <style scoped>
 .left {
   width: 3px;
   height: 100%;
-  background-color: aqua(251, 251, 251);
+  background-color: rgb(89, 251, 251);
 }
 </style>

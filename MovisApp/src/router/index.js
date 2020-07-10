@@ -28,12 +28,12 @@ export default function (/* { store, ssrContext } */) {
 
   Router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.authAdmin)) {
-      if (localStorage.getItem('dataUser') === null || localStorage.getItem('dataUser') === 'undefined') {
+      if (LocalStorage.getItem('dataUser') === null || LocalStorage.getItem('dataUser') === 'undefined') {
         next({
           name: 'loginPage'
         })
       } else {
-        const dataSession = localStorage.getItem('dataUser')
+        const dataSession = LocalStorage.getItem('dataUser')
         if (dataSession.level === 1) {
           next()
         } else {
@@ -48,7 +48,7 @@ export default function (/* { store, ssrContext } */) {
           name: 'loginPage'
         })
       } else {
-        const dataSession = localStorage.getItem('dataUser')
+        const dataSession = LocalStorage.getItem('dataUser')
         if (dataSession.level === 2) {
           next()
         } else {
